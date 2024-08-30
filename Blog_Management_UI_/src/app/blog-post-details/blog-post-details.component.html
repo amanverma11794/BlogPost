@@ -1,0 +1,50 @@
+
+<div *ngIf="isList">
+  <div class="container mt-2 mb-2">
+
+    <div class="row">
+      <div class="card">
+        <div class="card-body">
+
+          <div class="card-title m-3 d-flex justify-content-between">
+            <h4 class="">Blog post details</h4>
+            <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchTerm" (input)="filterData()" style="width:50%">
+            <button type="button" class="btn btn-sm btn-primary" (click)="newBlog()">New</button>
+          </div>
+
+          <div class="col-md-12">
+            <div *ngFor="let item of PostDetailListData">
+
+              <div class="card">
+
+                <div class="card-body">
+                  <p>{{item.blogDetails}}</p>
+                  <p class="d-flex justify-content-between align-items-center">
+                    <span>
+                      <b>Created by:</b> <span class="mr-4">{{item.userName}}</span>&nbsp;&nbsp;
+                      <b>Created Date:</b> <span class="mr-4">{{item.createdDate}}</span>
+                    </span>
+                    <span>
+                      <button type="button" class="btn btn-sm btn-primary mr-2" (click)="onEdit(item.id)">Edit</button>&nbsp;&nbsp;
+                      <button type="button" class="btn btn-sm btn-danger" (click)="deleteBlog(item.id)">Delete</button>
+                    </span>
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="isCreate">
+  <app-create-new-post (isBackToList)="getDataFromChild($event)"></app-create-new-post>
+</div>
+<div *ngIf="isEdit">
+  <app-create-new-post [userInputData]="userData" (isBackToList)="getDataFromChild($event)"></app-create-new-post>
+</div>
+
